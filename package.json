@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "mocha test/**/*_test.js",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -18,9 +18,10 @@
   },
   "homepage": "https://github.com/fedekau/mercado-libre-sre#readme",
   "devDependencies": {
-    "mocha": "*",
     "chai": "*",
-    "nodemon": "^1.12.1"
+    "mocha": "*",
+    "nodemon": "*",
+    "supertest": "*"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
