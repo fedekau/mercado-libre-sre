@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/fedekau/mercado-libre-sre#readme",
   "devDependencies": {
-    "mocha": "^4.0.1",
+    "mocha": "*",
+    "chai": "*",
     "nodemon": "^1.12.1"
   },
   "dependencies": {
