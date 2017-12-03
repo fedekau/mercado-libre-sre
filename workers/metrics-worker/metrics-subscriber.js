@@ -1,6 +1,6 @@
 const redis = require('redis');
 const sub = redis.createClient();
-const MetricsCruncher = require('./metrics-cruncher');
+const MetricsCruncher = require('../../lib/metrics/metrics-cruncher');
 
 sub.on("message", function (metricName, rawMessage) {
   const message = JSON.parse(rawMessage);
