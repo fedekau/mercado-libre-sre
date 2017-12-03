@@ -1,6 +1,6 @@
 const rp = require('request-promise-native');
+const errors = require('request-promise-native/errors');
 const MetricsPublisher = require('../metrics-publisher');
-const MetricNames = require('../../../lib/metrics/metric-names');
 
 class ItemFetcher {
   static async fetch(uri) {
@@ -10,16 +10,19 @@ class ItemFetcher {
       uri: uri
     };
 
-    const response = await rp.get(options);
+    try {
+      const response = await rp.get(options);
 
-    MetricsPublisher.publish(MetricNames.total_count_api_calls, 1);
-    MetricsPublisher.publish(MetricNames.response_time_api_calls, response.elapsedTime);
-    MetricsPublisher.publish(MetricNames.info_requests, {
-      status_code: response.statusCode,
-      count: 1
-    });
+      MetricsPublisher.publishExternalRequestResult(response);
 
-    return JSON.parse(response.body);
+      return JSON.parse(response.body);
+    } catch(e) {
+      if (e instanceof errors.StatusCodeError) {
+        MetricsPublisher.publishExternalRequestError(e);
+      }
+
+      throw e;
+    }
   }
 }
 
