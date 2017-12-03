@@ -3,7 +3,7 @@
   "configurations": [
 
     {
-        "name": "Launch app via yarn",
+        "name": "Launch express via yarn",
         "type": "node",
         "request": "launch",
         "cwd": "${workspaceFolder}",
@@ -12,6 +12,17 @@
             "debug"
         ],
         "port": 9229
+    },
+    {
+      "name": "Launch worker via yarn",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "debug-worker"
+      ],
+      "port": 9229
     },
     {
       "name": "Run mocha",
