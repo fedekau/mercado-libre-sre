@@ -12,6 +12,7 @@ class ItemFetcher {
 
     const response = await rp.get(options);
 
+    MetricsPublisher.publish(MetricNames.total_count_api_calls, 1);
     MetricsPublisher.publish(MetricNames.response_time_api_calls, response.elapsedTime);
 
     return JSON.parse(response.body);
