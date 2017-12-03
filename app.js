@@ -13,6 +13,10 @@ const MetricsPublisher = require('./app/services/metrics-publisher');
 const MetricNames = require('./lib/metrics/metric-names');
 
 server.use(responseTime((req, res, time) => {
+  if (req.originalUrl.includes('health')) {
+    return;
+  }
+
   MetricsPublisher.publish(MetricNames.response_time, time);
 }));
 
