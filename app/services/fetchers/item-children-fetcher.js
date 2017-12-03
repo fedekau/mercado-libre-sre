@@ -1,9 +1,9 @@
 const rp = require('request-promise-native');
+const Fetcher = require('./fetcher');
 
-class ItemChildrenFetcher {
+class ItemChildrenFetcher extends Fetcher {
   static async fetch(item_id) {
-    const response = await rp.get(`https://api.mercadolibre.com/items/${item_id}/children`);
-    return JSON.parse(response);
+    return super.fetch(`https://api.mercadolibre.com/items/${item_id}/children`);
   }
 }
 
