@@ -3,7 +3,9 @@ const Router = express.Router();
 const HealthChecker = require('../services/health-checker');
 
 Router.get('/', async (request, response) => {
-  response.json(await HealthChecker.status());
+  const health = await HealthChecker.status();
+
+  response.json(health);
 });
 
 module.exports = Router;
