@@ -14,6 +14,10 @@ class ItemFetcher {
 
     MetricsPublisher.publish(MetricNames.total_count_api_calls, 1);
     MetricsPublisher.publish(MetricNames.response_time_api_calls, response.elapsedTime);
+    MetricsPublisher.publish(MetricNames.info_requests, {
+      status_code: response.statusCode,
+      count: 1
+    });
 
     return JSON.parse(response.body);
   }
