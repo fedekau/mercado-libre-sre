@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon app.js",
+    "start": "nodemon app.js & nodemon workers/metrics-worker/index.js",
     "debug": "node --nolazy --inspect app.js"
   },
   "repository": {

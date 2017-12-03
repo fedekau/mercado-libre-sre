@@ -9,12 +9,6 @@ class MetricsCruncher {
     const metricKey = this._metricKey(metricName, timeframeId);
     const newMetricValue = await this._calculateNewValue(metricName, timeframeId, value);
 
-    console.log({
-      timeframeId,
-      metricKey,
-      newMetricValue
-    });
-
     this._updateMetric(metricKey, newMetricValue);
   }
 
