@@ -1,13 +1,14 @@
 const express = require('express');
 const Router = express.Router();
-const ItemGateway = require('../services/item-gateway');
+const ItemFinder = require('../services/item-finder');
 const errors = require('request-promise-native/errors');
 
 Router.get('/:id', async (request, response) => {
-  var id = request.params.id;
+  var item_id = request.params.id;
 
   try {
-    const item = await ItemGateway.get(id);
+    const item = await ItemFinder.find(item_id);
+    console.log(item);
 
     response.json(item);
   } catch(e) {
