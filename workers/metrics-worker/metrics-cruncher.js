@@ -9,7 +9,7 @@ class MetricsCruncher {
     const metricKey = this._metricKey(metricName, timeframeId);
     const newMetricValue = await this._calculateNewValue(metricName, timeframeId, value);
 
-    this._updateMetric(metricKey, newMetricValue);
+    this._updateMetric(metricName, metricKey, newMetricValue);
   }
 
   static _metricKey(metricName, timeframeId) {
@@ -29,9 +29,29 @@ class MetricsCruncher {
     return MetricNames[metricName].processor(value, oldValue);
   }
 
-  static _updateMetric(metricKey, newMetricValue) {
+  static _updateMetric(metricName, metricKey, newMetricValue) {
+    if (MetricNames[metricName].type === 'counter') {
+      return this._incr(metricKey);
+    } else {
+      return this._set(metricKey, newMetricValue);
+    }
+  }
+
+  static _incr(key) {
     return new Promise((resolve, reject) => {
-      client.set(metricKey, newMetricValue, (error, result) => {
+      client.incr(key, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result)
+        }
+      });
+    });
+  }
+
+  static _set(key, value) {
+    return new Promise((resolve, reject) => {
+      client.set(key, value, (error, result) => {
         if (error) {
           reject(error);
         } else {
