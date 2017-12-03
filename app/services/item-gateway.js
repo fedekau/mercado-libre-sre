@@ -17,15 +17,19 @@ class ItemGateway {
       start_time: item.start_time,
       stop_time: item.stop_time
     }).then((model) => {
-      Children.bulkCreate(children.map((c) => {
+      return Promise.all([ Promise.resolve(model), Children.bulkCreate(children.map((c) => {
         return {
           item_id: c.id,
           parent_item_id: model.item_id,
           stop_time: c.stop_time
         };
-      }));
+      }))]);
+    }).then((models) => {
+      const [ item, children ] = models;
 
-      return model;
+      return item.setChildren(children).then((model) => {
+        return model;
+      });;
     });
   }
 }

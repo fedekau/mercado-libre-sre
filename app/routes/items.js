@@ -8,7 +8,6 @@ Router.get('/:id', async (request, response) => {
 
   try {
     const item = await ItemFinder.find(item_id);
-    console.log(item);
 
     response.json(item);
   } catch(e) {
@@ -25,6 +24,8 @@ Router.get('/:id', async (request, response) => {
           error: "internal_server_error",
           cause: [ e.cause ]
         });
+
+        throw e;
     }
   }
 });

@@ -7,15 +7,23 @@ module.exports = (sequelize, DataTypes) => {
     stop_time: DataTypes.DATE
   }, {
     underscored : true,
-    tableName: 'children',
-    classMethods: {
-      associate: function(models) {
-        Children.belongsTo(models.Item, {
-          foreignKey: 'parent_item_id',
-          onDelete: 'CASCADE',
-        });
-      }
-    }
+    tableName: 'children'
   });
+
+  Children.associate = (models) => {
+    Children.belongsTo(models.Item, {
+      foreignKey: 'parent_item_id',
+      onDelete: 'CASCADE',
+    });
+  }
+
+  Children.prototype.toJSON = function () {
+    const values = this.get();
+
+    delete values['created_at'];
+    delete values['updated_at'];
+
+    return values;
+  }
   return Children;
 };

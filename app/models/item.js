@@ -1,3 +1,5 @@
+const { Children } = require('./index');
+
 module.exports = (sequelize, DataTypes) => {
   const Item = sequelize.define('Item', {
     item_id: {
@@ -13,15 +15,23 @@ module.exports = (sequelize, DataTypes) => {
     updated_at: DataTypes.DATE
   }, {
     underscored : true,
-    tableName: 'items',
-    classMethods: {
-      associate: (models) =>{
-        Item.hasMany(models.Children, {
-          foreignKey: 'parent_item_id',
-          as: 'children',
-        });
-      }
-    }
+    tableName: 'items'
   });
+
+  Item.associate = (models) => {
+    Item.hasMany(models.Children, {
+      foreignKey: 'item_id'
+    });
+  }
+
+  Item.prototype.toJSON = function () {
+    const values = this.get();
+
+    delete values['created_at'];
+    delete values['updated_at'];
+
+    return values;
+  }
+
   return Item;
 };
