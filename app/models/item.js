@@ -20,17 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Item.associate = (models) => {
     Item.hasMany(models.Children, {
-      foreignKey: 'item_id'
+      foreignKey: 'parent_item_id'
     });
-  }
-
-  Item.prototype.toJSON = function () {
-    const values = this.get();
-
-    delete values['created_at'];
-    delete values['updated_at'];
-
-    return values;
   }
 
   return Item;

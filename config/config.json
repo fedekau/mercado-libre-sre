@@ -13,7 +13,8 @@
     "database": "mercado-libre-sre_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "redis": "redis://127.0.0.1:6379"
+    "redis": "redis://127.0.0.1:6379",
+    "logging": false
   },
   "production": {
     "username": "root",
@@ -21,6 +22,7 @@
     "database": "mercado-libre-sre_production",
     "host": "mysql",
     "dialect": "mysql",
-    "redis": "redis://redis:6379"
+    "redis": "redis://redis:6379",
+    "logging": false
   }
 }

@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true
     },
+    parent_item_id: {
+      type: DataTypes.STRING
+    },
     stop_time: DataTypes.DATE
   }, {
     underscored : true,
@@ -13,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Children.associate = (models) => {
     Children.belongsTo(models.Item, {
       foreignKey: 'parent_item_id',
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     });
   }
 
