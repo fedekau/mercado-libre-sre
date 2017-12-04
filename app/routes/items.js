@@ -2,14 +2,17 @@ const express = require('express');
 const Router = express.Router();
 const ItemFinder = require('../services/item-finder');
 const errors = require('request-promise-native/errors');
+const ItemPresenter = require('../presenters/item-presenter');
 
 Router.get('/:id', async (request, response) => {
   var item_id = request.params.id;
 
   try {
     const item = await ItemFinder.find(item_id);
+    const presenter = new ItemPresenter(item);
+    const json = await presenter.toJSON();
 
-    response.json(item);
+    response.json(json);
   } catch(e) {
     if (e instanceof errors.StatusCodeError) {
       response.
