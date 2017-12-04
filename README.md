@@ -62,7 +62,7 @@ Para levantr todo en "producción" se utliza docker-compose. Se creo el ejecutab
 ## Cosas a mejorar
 
 - Las claves/configuraciones de producción no deberian estar comiteadas, pero a efectos de esta aplicación de "juguete" se hizo caso omiso a esta buena práctica.
-- Levantar multiples nodos y balancearlos, poniendo por ejemplo Nginx como Load Balancer.
+- Levantar multiples nodos y balancearlos, poniendo por ejemplo Nginx como Load Balancer. Se hizo con pm2, pero se puede mejorar.
 - La base de tados no tiene read replicas, se podria hacer.
 - La base de datos no tiene clave. Inaceptable para producción, pero como no va ir a poduccion no pasa nada :D
 - Agregar mas y mejor logging.

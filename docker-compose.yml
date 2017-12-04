@@ -17,7 +17,7 @@ services:
     depends_on:
       - mysql
       - redis
-    command: ["yarn", "start"]
+    command: ["pm2-docker", "process.yml", "--only", "APP"]
   worker:
     build: .
     environment:
@@ -26,4 +26,4 @@ services:
       - .:/usr/src/app
     depends_on:
       - redis
-    command: ["yarn", "worker"]
+    command: ["pm2-docker", "process.yml", "--only", "WORKER"]

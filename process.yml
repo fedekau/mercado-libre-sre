@@ -1,0 +1,8 @@
+apps:
+  - script   : 'app.js'
+    name     : 'APP'
+    exec_mode: 'cluster'
+    instances: 0
+  - script   : 'workers/metrics-worker/index.js'
+    name     : 'WORKER'
+    instances: 1
