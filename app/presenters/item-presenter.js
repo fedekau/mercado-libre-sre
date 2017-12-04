@@ -18,6 +18,8 @@ class ItemPresenter {
       }
     });
 
+    delete json['Children'];
+
     return json;
   }
 }
