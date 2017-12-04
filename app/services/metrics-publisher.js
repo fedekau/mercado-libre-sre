@@ -1,5 +1,4 @@
-const redis = require('redis');
-const pub = redis.createClient();
+const pub = require('../../lib/redis').client();
 const MetricNames = require('../../lib/metrics/metric-names');
 
 class MetricsPublisher {

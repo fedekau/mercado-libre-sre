@@ -1,5 +1,4 @@
-const redis = require('redis');
-const client = redis.createClient();
+const client = require('../../lib/redis').client();
 const MetricsCruncher = require('../../lib/metrics/metrics-cruncher');
 const MetricNames = require('../../lib/metrics/metric-names');
 

@@ -4,20 +4,23 @@
     "password": null,
     "database": "mercado-libre-sre_development",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "redis": "redis://127.0.0.1:6379"
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "mercado-libre-sre_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "redis": "redis://127.0.0.1:6379"
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "mercado-libre-sre_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "mysql",
+    "dialect": "mysql",
+    "redis": "redis://redis:6379"
   }
 }

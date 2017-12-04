@@ -1,0 +1,29 @@
+version: '3'
+services:
+  redis:
+    image: "redis:alpine"
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  web:
+    build: .
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mysql
+      - redis
+    command: ["yarn", "start"]
+  worker:
+    build: .
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+    command: ["yarn", "worker"]
