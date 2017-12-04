@@ -29,18 +29,19 @@ Para medir la performance se la aplicación se registran ciertas metricas que pu
 ## Suposiciones que te realizaron
 
 - El endpoint `/health` retorna el resultado para los ultimos 5 minutos agrupando los datos por minuto. Sin embargo en Redis se encuentra toda la información. Se puede configurar para retornar mas resultados.
--
 
 ## Development
 
-- Ejecutar `yarn start`, esto levanta la aplicacion y el worker.
+- Ejecutar `yarn start-development`, esto levanta la aplicacion y el worker.
 
 ## Tests
 
-Se utilizo `mocha` con las assrtions de `chai` para testear.
+Se utilizo `mocha` con las assertions de `chai` para testear.
 
 Se agregaron algunos tests muy basicos (por falta de tiempo) para verificar ciertas cosas.
 
+- Crear base de datos con `NODE_ENV=test node_modules/.bin/sequelize db:create`
+- Ejecutar migraciones con `NODE_ENV=test node_modules/.bin/sequelize db:migrate`
 - Para ejecutar los tests correr `yarn test`
 
 ## Cosas a mejorar
@@ -48,5 +49,7 @@ Se agregaron algunos tests muy basicos (por falta de tiempo) para verificar cier
 - Las claves/configuraciones de producción no deberian estar comiteadas, pero a efectos de esta aplicación de "juguete" se hizo caso omiso a esta buena práctica.
 - Levantar multiples nodos y balancearlos, poniendo por ejemplo Nginx como Load Balancer.
 - La base de tados no tiene read replicas, se podria hacer.
+- La base de datos no tiene clave. Inaceptable para producción, pero como no va ir a poduccion no pasa nada :D.
+
 
 
