@@ -44,12 +44,28 @@ Se agregaron algunos tests muy basicos (por falta de tiempo) para verificar cier
 - Ejecutar migraciones con `NODE_ENV=test node_modules/.bin/sequelize db:migrate`
 - Para ejecutar los tests correr `yarn test`
 
+## Ejecutar
+
+Para levantr todo en "producción" se utliza docker-compose. Se creo el ejecutable `bin/run` qur levanta toda la infraestructura necesaria, crea la base de datos y corre migraciones. Todo se hace ne detched mode, por lo que no se ve el output en consola.
+
+### Forma detached
+
+- Ejecutar `bin/run`
+- Para bajar los services ejecutar `docker-compose stop`
+
+### Forma standard
+
+- docker-compose up
+- docker-compose exec web node_modules/.bin/sequelize db:create
+- docker-compose exec web node_modules/.bin/sequelize db:migrate
+
 ## Cosas a mejorar
 
 - Las claves/configuraciones de producción no deberian estar comiteadas, pero a efectos de esta aplicación de "juguete" se hizo caso omiso a esta buena práctica.
 - Levantar multiples nodos y balancearlos, poniendo por ejemplo Nginx como Load Balancer.
 - La base de tados no tiene read replicas, se podria hacer.
-- La base de datos no tiene clave. Inaceptable para producción, pero como no va ir a poduccion no pasa nada :D.
+- La base de datos no tiene clave. Inaceptable para producción, pero como no va ir a poduccion no pasa nada :D
+- Agregar mas y mejor logging.
 
 
 
